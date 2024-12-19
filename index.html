@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us</title>
+</head>
+<body style="display: flex; justify-content: center;">
+  <div>
+    <div>
+      <h1 style="color: #34394c; font-family: sans-serif;">Contact Us</h1>
+      <h4 style="color: #53637c; font-family: sans-serif;">Please fill this form in a decent manner</h4>
+
+      <br>      
+      <hr style="border-style: dashed; color: #cdd4df;">
+      <br>
+
+      <form id="contactform">
+        <h4 style="color: #34394c; font-family: sans-serif;">Full name</h4>
+        <div style="display: flex;">
+          <div>
+            <input id="firstname" style="width: 90%; height: 30px; color: #53627c;" type="text" name="first_name" required>
+            <h5 style="color: #53637c; font-family: sans-serif;">First Name</h5> 
+          </div>
+          <div>
+            <input id="lastname" style="width: 90%; height: 30px; color: #53627c;" type="text" name="last_name" required>
+            <h5 style="color: #53637c; font-family: sans-serif;">Last Name</h5>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="color: #34394c; font-family: sans-serif;">E-mail</h4>
+          <input id="email" type="email" name="email" required>
+          <h5 style="color: #53637c; font-family: sans-serif">example@example.com</h5>
+        </div>
+
+        <div>
+          <h4 style="color: #34394c; font-family: sans-serif;">Message</h4>
+          <textarea id="message" style="width: 100%; height: 100px;" name="message" required></textarea>
+        </div>
+
+        <button type="button" onclick="sendmail()" style="background-color: black; color: white; box-shadow: none;">SUBMIT</button>
+      </form>
+
+      <p id="status" style="color: green; font-family: sans-serif; display: none;">Email sent successfully!</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
+  <script>
+    function sendmail() {
+
+      emailjs.init("MPphFInKLXni2mX2X"); // мой Id в emailJs не воруйте мои данные плиз!
+
+      var params = {
+        firstname: document.querySelector("#firstname").value,
+        lastname: document.querySelector("#lastname").value,
+        email: document.querySelector("#email").value, // email отправителя
+        message: document.querySelector("#message").value,
+        to_email: document.querySelector("#email").value // email получателя
+      };
+
+      var serviceID = "service_5wkxw1n"; // ID сервиса
+      var templateID = ""; // тут ничего нет не смотрите сюа
+
+      emailjs.send(serviceID, templateID, params)
+        .then(function(res) {
+          alert("Email sent successfully");
+        })
+        .catch(function(error) {
+          alert("Failed to send email: " + error);
+        });
+    }
+  </script>
+</body>
+</html>
